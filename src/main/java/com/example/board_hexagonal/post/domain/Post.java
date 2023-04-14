@@ -1,13 +1,17 @@
 package com.example.board_hexagonal.post.domain;
 
+import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
 import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
+import com.example.board_hexagonal.post.dto.CreatePostDto;
 import com.example.board_hexagonal.user.adapter.out.UserEntity;
+import com.example.board_hexagonal.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.xml.stream.events.Comment;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +31,24 @@ public class Post {
 
     private LocalDateTime updatedAt;
 
-    private UserEntity user;
+    private User user;
 
-    private List<CommentEntity> comments;
+    private List<Comment> comments;
 
-    private List<AttachedFileEntity> attachedFiles;
+    private List<AttachedFile> attachedFiles;
+
+    public Post createPost(User author, String title, String description, List<AttachedFile> attachedFiles) {
+        return new Post(
+                null,
+                title,
+                description,
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                author,
+                null,
+                attachedFiles
+
+        );
+    }
 
 }

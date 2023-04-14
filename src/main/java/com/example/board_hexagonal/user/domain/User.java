@@ -32,9 +32,6 @@ public class User {
 
     private List<PostEntity> posts;
 
-
-
-    //setter업애기 위해?
     public User createUser(CreateUserDTO createUserDTO){
         return new User(null,createUserDTO.getEmail(),createUserDTO.getPassword(),createUserDTO.getNickname(),LocalDateTime.now(),false,new ArrayList<>());
 

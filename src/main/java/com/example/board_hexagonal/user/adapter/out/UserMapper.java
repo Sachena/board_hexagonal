@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    UserEntity mapToEntity(User user){
+    public UserEntity mapToEntity(User user){
 
         return new UserEntity(
                 null,

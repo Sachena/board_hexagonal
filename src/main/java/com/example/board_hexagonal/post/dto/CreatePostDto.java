@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class CreatePostDto {
 
-    private String nickname;
+    private String email;
 
     private String title;
 
