@@ -1,4 +1,4 @@
-package com.example.board_hexagonal.post.entity;
+package com.example.board_hexagonal.post.adapter.out;
 
 
 import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;

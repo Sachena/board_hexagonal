@@ -1,7 +1,7 @@
 package com.example.board_hexagonal.user.adapter.out;
 
 
-import com.example.board_hexagonal.post.entity.PostEntity;
+import com.example.board_hexagonal.post.adapter.out.PostEntity;
 import lombok.*;
 
 import javax.persistence.*;

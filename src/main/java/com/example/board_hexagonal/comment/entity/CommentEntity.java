@@ -1,6 +1,6 @@
 package com.example.board_hexagonal.comment.entity;
 
-import com.example.board_hexagonal.post.entity.PostEntity;
+import com.example.board_hexagonal.post.adapter.out.PostEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

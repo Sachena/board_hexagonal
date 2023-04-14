@@ -1,7 +1,7 @@
 package com.example.board_hexagonal.user.domain;
 
 
-import com.example.board_hexagonal.post.entity.PostEntity;
+import com.example.board_hexagonal.post.adapter.out.PostEntity;
 import com.example.board_hexagonal.user.dto.CreateUserDTO;
 import com.example.board_hexagonal.user.dto.DeleteUserDto;
 import com.example.board_hexagonal.user.dto.EditUserDTO;
