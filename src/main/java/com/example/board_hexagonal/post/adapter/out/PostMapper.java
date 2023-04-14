@@ -18,6 +18,15 @@ public class PostMapper {
 
 
     public PostEntity mapToEntity(Post post){
-        return null;
+        return new PostEntity(
+                null,
+                post.getTitle(),
+                post.getDescription(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                null,
+                null,
+                null
+        );
     }
 }

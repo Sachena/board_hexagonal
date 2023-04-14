@@ -10,9 +10,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AttachedFileMapper {
 
-    private final PostMapper postMapper;
-
-    AttachedFileEntity mapToEntity(AttachedFile attachedFile){
-        return null;
+    public AttachedFileEntity mapToEntity(AttachedFile attachedFile){
+        return new AttachedFileEntity(
+                null,
+                attachedFile.getUrl(),
+                null
+        );
     }
 }

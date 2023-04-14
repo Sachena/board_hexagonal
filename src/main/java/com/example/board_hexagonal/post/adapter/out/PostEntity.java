@@ -65,4 +65,8 @@ public class PostEntity {
             this.addAttachedFile(newAttachedFile);
         }
     }
+
+    public void addAttachedFileList(List<AttachedFileEntity> attachedFileEntityList) {
+        this.attachedFiles = attachedFileEntityList;
+    }
 }

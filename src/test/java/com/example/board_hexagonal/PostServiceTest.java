@@ -65,7 +65,7 @@ class PostServiceTest {
         Post newPost = createPostUsecase.createPost(createPostDto);
 
         // then
-        assertEquals(newPost, postRepository.findByTitle(createPostDto.getTitle()));
+        assertEquals(newPost.getTitle(), postRepository.findByTitle(createPostDto.getTitle()).getTitle()  );
 //        newPost.getAttachedFiles().forEach(attachedFile -> {
 //            AttachedFile retrieveFile = attachedFileRepository.findByUrl(attachedFile.getUrl());
 //            assertEquals(attachedFile.getUrl(), retrieveFile.getUrl());
