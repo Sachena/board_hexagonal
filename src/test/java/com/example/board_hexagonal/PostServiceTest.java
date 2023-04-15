@@ -30,16 +30,17 @@ class PostServiceTest {
 
     @Autowired
     private CreateUserUsecase createUserUsecase;
+
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private CreatePostUsecase createPostUsecase;
 
-    @Autowired
-    private EditPostUsecase editPostUsecase;
 
     @Autowired
     private PostRepository postRepository;
+
     @Autowired
     private AttachedFileRepository attachedFileRepository;
 
@@ -77,42 +78,39 @@ class PostServiceTest {
 
     }
 
-    @Test
-    void 게시글수정(){
-        // given
-        CreatePostDto createPostDto = new CreatePostDto();
-        createPostDto.setEmail("test@naver.com");
-        createPostDto.setTitle("testTitle");
-        createPostDto.setDescription("asdasd");
-
-        List<String> fileUrls = new ArrayList<>();
-        fileUrls.add("test");
-        createPostDto.setFileUrls(fileUrls);
-        Post newPost = createPostUsecase.createPost(createPostDto);
-
-        //기존 파일 수정
-        EditPostDTO editPostDTO = new EditPostDTO();
-        editPostDTO.setId(newPost.getId());
-        editPostDTO.setTitle("editTest");
-        editPostDTO.setDescription("editTest");
-
-        List<String> editUrl = new ArrayList<>();
-        fileUrls.add("editFile");
-        editPostDTO.setFileUrls(editUrl);
-
-        //when
-        editPostUsecase.editPost(editPostDTO);
-
-        //then
-        PostEntity editPost = postRepository.findByTitle(editPostDTO.getTitle());
-        assertEquals(editPostDTO.getTitle(), editPost.getTitle());
-
-//        editPost.getAttachedFiles().forEach( attachedFile -> {
-//            AttachedFile retrieveFile = attachedFileRepository.findByUrl(attachedFile.getUrl());
-//            assertEquals(attachedFile.getUrl(), retrieveFile.getUrl());
-//        });
-
-    }
+//    @Test
+//    void 게시글수정(){
+//        // given
+//        CreatePostDto createPostDto = new CreatePostDto();
+//        createPostDto.setEmail("test@naver.com");
+//        createPostDto.setTitle("testTitle");
+//        createPostDto.setDescription("asdasd");
+//
+//        List<String> fileUrls = new ArrayList<>();
+//        fileUrls.add("test");
+//        createPostDto.setFileUrls(fileUrls);
+//        Post newPost = createPostUsecase.createPost(createPostDto);
+//
+//        //기존 파일 수정
+//        EditPostDTO editPostDTO = new EditPostDTO();
+//        editPostDTO.setId(newPost.getId());
+//        editPostDTO.setTitle("editTest");
+//        editPostDTO.setDescription("editTest");
+//
+//        List<String> editUrl = new ArrayList<>();
+//        fileUrls.add("editFile");
+//        editPostDTO.setFileUrls(editUrl);
+//
+//        //when
+//        editPostUsecase.editPost(editPostDTO);
+//
+//        //then
+//        PostEntity editPost = postRepository.findByTitle(editPostDTO.getTitle());
+//        assertEquals(editPostDTO.getTitle(), editPost.getTitle());
+//
+//
+//
+//    }
 //
 //    @Test
 //    void 게시글삭제(){

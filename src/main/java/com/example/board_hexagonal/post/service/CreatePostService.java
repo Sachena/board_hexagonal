@@ -2,12 +2,9 @@ package com.example.board_hexagonal.post.service;
 
 import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
 import com.example.board_hexagonal.post.application.port.in.CreatePostUsecase;
-import com.example.board_hexagonal.post.application.port.in.EditPostUsecase;
-import com.example.board_hexagonal.post.application.port.out.RetrievePostPort;
 import com.example.board_hexagonal.post.application.port.out.SavePostPort;
 import com.example.board_hexagonal.post.domain.Post;
 import com.example.board_hexagonal.post.dto.CreatePostDto;
-import com.example.board_hexagonal.post.dto.EditPostDTO;
 import com.example.board_hexagonal.user.application.port.out.RetrieveUserPort;
 import com.example.board_hexagonal.user.domain.User;
 import lombok.RequiredArgsConstructor;

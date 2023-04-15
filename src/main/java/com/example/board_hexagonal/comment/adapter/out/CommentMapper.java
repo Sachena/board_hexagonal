@@ -14,33 +14,5 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class CommentMapper {
-    private final PostMapper postMapper;
-
-    public Comment mapToDomain(CommentEntity commentEntity) {
-        return new Comment(
-                commentEntity.getId(),
-                commentEntity.getDescription(),
-                commentEntity.getCreatedAt(),
-                commentEntity.getAuthorNickname(),
-                postMapper.mapToDomain(commentEntity.getPost())
-        );
-    }
-
-    public List<Comment> mapToDomainList(List<CommentEntity> commentEntityList) {
-
-        List<Comment> commentList = new ArrayList<>();
-        for (CommentEntity commentEntity : commentEntityList) {
-            Comment commentDomain = new Comment(
-                    commentEntity.getId(),
-                    commentEntity.getDescription(),
-                    commentEntity.getCreatedAt(),
-                    commentEntity.getAuthorNickname(),
-                    postMapper.mapToDomain(commentEntity.getPost())
-            );
-            commentList.add(commentDomain);
-        }
-
-        return commentList;
-    }
 
 }

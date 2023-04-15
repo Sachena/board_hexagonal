@@ -34,16 +34,4 @@ public class PostMapper {
         );
     }
 
-    public Post mapToDomain(PostEntity postEntity) {
-        return new Post(
-                postEntity.getId(),
-                postEntity.getTitle(),
-                postEntity.getDescription(),
-                postEntity.getCreatedAt(),
-                postEntity.getUpdatedAt(),
-                userMapper.mapToDomain(postEntity.getUser()),
-                commentMapper.mapToDomainList(postEntity.getComments()),
-                attachedFileMapper.mapToDomainList(postEntity.getAttachedFiles())
-        );
-    }
 }
