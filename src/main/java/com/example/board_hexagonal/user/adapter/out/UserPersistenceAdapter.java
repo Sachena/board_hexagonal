@@ -5,7 +5,7 @@ import com.example.board_hexagonal.exception.DuplicateException;
 import com.example.board_hexagonal.exception.InvalidUserException;
 import com.example.board_hexagonal.user.application.port.out.CheckNewUserPort;
 import com.example.board_hexagonal.user.application.port.out.CheckUserPort;
-import com.example.board_hexagonal.user.application.port.out.LoadUserPort;
+import com.example.board_hexagonal.user.application.port.out.RetrieveUserPort;
 import com.example.board_hexagonal.user.application.port.out.SaveUserPort;
 import com.example.board_hexagonal.user.domain.User;
 import com.example.board_hexagonal.user.dto.CreateUserDTO;
@@ -17,19 +17,19 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class UserPersistenceAdapter implements LoadUserPort, SaveUserPort, CheckNewUserPort, CheckUserPort {
+public class UserPersistenceAdapter implements RetrieveUserPort, SaveUserPort, CheckNewUserPort, CheckUserPort {
 
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     @Override
-    public User loadUser(String email) {
+    public User retrieveUser(String email) {
         return userMapper.mapToDomain(userRepository.findByEmail(email));
     }
 
     @Override
     public void saveUser(User user) {
-        userRepository.save(userMapper.mapToEntity(user));
+        userRepository.save(userMapper.mapToEntityWithoutId(user));
     }
 
     @Override

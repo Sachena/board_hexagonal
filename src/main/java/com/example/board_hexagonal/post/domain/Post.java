@@ -2,6 +2,7 @@ package com.example.board_hexagonal.post.domain;
 
 import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
 import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;
+import com.example.board_hexagonal.comment.domain.Comment;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
 import com.example.board_hexagonal.post.dto.CreatePostDto;
 import com.example.board_hexagonal.user.adapter.out.UserEntity;
@@ -11,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.xml.stream.events.Comment;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

@@ -3,8 +3,8 @@ package com.example.board_hexagonal.user.application.port.out;
 
 import com.example.board_hexagonal.user.domain.User;
 
-public interface LoadUserPort {
+public interface RetrieveUserPort {
 
-    User loadUser(String email);
+    User retrieveUser(String email);
 
 }

@@ -1,6 +1,8 @@
 package com.example.board_hexagonal.post.adapter.out;
 
+import com.example.board_hexagonal.attachedFile.adapter.out.AttachedFileMapper;
 import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;
+import com.example.board_hexagonal.comment.adapter.out.CommentMapper;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
 import com.example.board_hexagonal.post.domain.Post;
 import com.example.board_hexagonal.user.adapter.out.UserEntity;
@@ -15,9 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostMapper {
     private final UserMapper userMapper;
+    private final CommentMapper commentMapper;
+    private final AttachedFileMapper attachedFileMapper;
 
 
-    public PostEntity mapToEntity(Post post){
+    public PostEntity mapToEntityWithoutId(Post post){
         return new PostEntity(
                 null,
                 post.getTitle(),
@@ -27,6 +31,19 @@ public class PostMapper {
                 null,
                 null,
                 null
+        );
+    }
+
+    public Post mapToDomain(PostEntity postEntity) {
+        return new Post(
+                postEntity.getId(),
+                postEntity.getTitle(),
+                postEntity.getDescription(),
+                postEntity.getCreatedAt(),
+                postEntity.getUpdatedAt(),
+                userMapper.mapToDomain(postEntity.getUser()),
+                commentMapper.mapToDomainList(postEntity.getComments()),
+                attachedFileMapper.mapToDomainList(postEntity.getAttachedFiles())
         );
     }
 }
