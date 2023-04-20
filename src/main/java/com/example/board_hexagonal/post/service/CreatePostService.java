@@ -23,7 +23,6 @@ public class CreatePostService implements CreatePostUsecase {
 
     @Override
     public Post createPost(CreatePostDto createPostDto) {
-
         User author = retrieveUserPort.retrieveUser(createPostDto.getEmail());
         List<AttachedFile> attachedFiles = new ArrayList<>();
 
@@ -33,7 +32,7 @@ public class CreatePostService implements CreatePostUsecase {
             attachedFiles.add(new AttachedFile(null,fileUrl,newPost));
         }
 
-        newPost = newPost.createPost(author, createPostDto.getTitle(), createPostDto.getDescription(), attachedFiles);
+        newPost = newPost.createPost(author.getId(), createPostDto.getTitle(), createPostDto.getDescription(), attachedFiles);
         savePostPort.savePost(newPost);
 
         return newPost;

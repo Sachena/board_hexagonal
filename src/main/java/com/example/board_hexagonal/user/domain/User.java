@@ -2,6 +2,7 @@ package com.example.board_hexagonal.user.domain;
 
 
 import com.example.board_hexagonal.post.adapter.out.PostEntity;
+import com.example.board_hexagonal.post.domain.Post;
 import com.example.board_hexagonal.user.dto.CreateUserDTO;
 import com.example.board_hexagonal.user.dto.DeleteUserDto;
 import com.example.board_hexagonal.user.dto.EditUserDTO;
@@ -30,10 +31,9 @@ public class User {
 
     private Boolean isDeleted;
 
-    private List<PostEntity> posts;
 
     public User createUser(CreateUserDTO createUserDTO){
-        return new User(null,createUserDTO.getEmail(),createUserDTO.getPassword(),createUserDTO.getNickname(),LocalDateTime.now(),false,new ArrayList<>());
+        return new User(null,createUserDTO.getEmail(),createUserDTO.getPassword(),createUserDTO.getNickname(),LocalDateTime.now(),false);
 
     }
 

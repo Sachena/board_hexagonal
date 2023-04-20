@@ -16,20 +16,20 @@ public class UserMapper {
                 user.getNickname(),
                 user.getJoinedAt(),
                 user.getIsDeleted(),
-                user.getPosts()
+                null
         );
 
     }
 
     public User mapToDomain(UserEntity userEntity) {
+        
         return new User(
                 userEntity.getId(),
                 userEntity.getEmail(),
                 userEntity.getPassword(),
                 userEntity.getNickname(),
                 userEntity.getJoinedAt(),
-                userEntity.getIsDeleted(),
-                userEntity.getPosts()
+                userEntity.getIsDeleted()
         );
     }
 }

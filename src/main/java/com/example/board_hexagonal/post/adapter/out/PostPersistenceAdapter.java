@@ -4,9 +4,12 @@ import com.example.board_hexagonal.attachedFile.adapter.out.AttachedFileMapper;
 import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
 import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;
 import com.example.board_hexagonal.attachedFile.repository.AttachedFileRepository;
+import com.example.board_hexagonal.post.application.port.out.RetrievePostPort;
 import com.example.board_hexagonal.post.application.port.out.SavePostPort;
 import com.example.board_hexagonal.post.domain.Post;
 import com.example.board_hexagonal.post.repository.PostRepository;
+import com.example.board_hexagonal.user.adapter.out.UserEntity;
+import com.example.board_hexagonal.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +18,9 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class PostPersistenceAdapter implements SavePostPort {
+public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort {
 
+    private final UserRepository userRepository;
     private final PostRepository postRepository;
     private final AttachedFileRepository attachedFileRepository;
 
@@ -41,4 +45,12 @@ public class PostPersistenceAdapter implements SavePostPort {
 
     }
 
+    @Override
+    public Post retrievePost(Long postId) {
+
+        PostEntity postEntity = postRepository.findById(postId).orElse(null);
+        System.out.println(postEntity.getId());
+
+        return null;
+    }
 }

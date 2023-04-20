@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "posts")
 public class UserEntity {
 
     @Id

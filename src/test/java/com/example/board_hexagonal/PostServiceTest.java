@@ -37,6 +37,9 @@ class PostServiceTest {
     @Autowired
     private CreatePostUsecase createPostUsecase;
 
+    @Autowired
+    private EditPostUsecase editPostUsecase;
+
 
     @Autowired
     private PostRepository postRepository;
@@ -54,7 +57,15 @@ class PostServiceTest {
         createUserDTO.setPassword("test");
         User author = createUserUsecase.createUser(createUserDTO);
 
+        CreatePostDto createPostDto = new CreatePostDto();
+        createPostDto.setEmail("test@naver.com");
+        createPostDto.setTitle("testTitle");
+        createPostDto.setDescription("asdasd");
 
+        List<String> fileUrls = new ArrayList<>();
+        fileUrls.add("test");
+        createPostDto.setFileUrls(fileUrls);
+        Post newPost = createPostUsecase.createPost(createPostDto);
 
     }
 
@@ -62,11 +73,11 @@ class PostServiceTest {
     void 게시글생성() {
         // given
         CreatePostDto createPostDto = new CreatePostDto();
-        createPostDto.setEmail("test@naver.com");
-        createPostDto.setTitle("testTitle");
-        createPostDto.setDescription("asdasd");
+        createPostDto.setEmail("newTest@naver.com");
+        createPostDto.setTitle("newTestTitle");
+        createPostDto.setDescription("asdasdasdasda");
         List<String> fileUrls = new ArrayList<>();
-        fileUrls.add("test");
+        fileUrls.add("newTest");
         createPostDto.setFileUrls(fileUrls);
 
         // when
@@ -78,39 +89,39 @@ class PostServiceTest {
 
     }
 
-//    @Test
-//    void 게시글수정(){
-//        // given
-//        CreatePostDto createPostDto = new CreatePostDto();
-//        createPostDto.setEmail("test@naver.com");
-//        createPostDto.setTitle("testTitle");
-//        createPostDto.setDescription("asdasd");
-//
-//        List<String> fileUrls = new ArrayList<>();
-//        fileUrls.add("test");
-//        createPostDto.setFileUrls(fileUrls);
-//        Post newPost = createPostUsecase.createPost(createPostDto);
-//
-//        //기존 파일 수정
-//        EditPostDTO editPostDTO = new EditPostDTO();
-//        editPostDTO.setId(newPost.getId());
-//        editPostDTO.setTitle("editTest");
-//        editPostDTO.setDescription("editTest");
-//
-//        List<String> editUrl = new ArrayList<>();
-//        fileUrls.add("editFile");
-//        editPostDTO.setFileUrls(editUrl);
-//
-//        //when
-//        editPostUsecase.editPost(editPostDTO);
-//
-//        //then
+    @Test
+    void 게시글수정(){
+        // given
+        CreatePostDto createPostDto = new CreatePostDto();
+        createPostDto.setEmail("test@naver.com");
+        createPostDto.setTitle("testTitle");
+        createPostDto.setDescription("asdasd");
+
+        List<String> fileUrls = new ArrayList<>();
+        fileUrls.add("test");
+        createPostDto.setFileUrls(fileUrls);
+        Post newPost = createPostUsecase.createPost(createPostDto);
+
+        //기존 파일 수정
+        EditPostDTO editPostDTO = new EditPostDTO();
+        editPostDTO.setId(newPost.getId());
+        editPostDTO.setTitle("editTest");
+        editPostDTO.setDescription("editTest");
+
+        List<String> editUrl = new ArrayList<>();
+        fileUrls.add("editFile");
+        editPostDTO.setFileUrls(editUrl);
+
+        //when
+        editPostUsecase.editPost(editPostDTO);
+
+        //then
 //        PostEntity editPost = postRepository.findByTitle(editPostDTO.getTitle());
 //        assertEquals(editPostDTO.getTitle(), editPost.getTitle());
-//
-//
-//
-//    }
+
+
+
+    }
 //
 //    @Test
 //    void 게시글삭제(){

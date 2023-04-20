@@ -31,20 +31,20 @@ public class Post {
 
     private LocalDateTime updatedAt;
 
-    private User user;
+    private Long userId;
 
     private List<Comment> comments;
 
     private List<AttachedFile> attachedFiles;
 
-    public Post createPost(User author, String title, String description, List<AttachedFile> attachedFiles) {
+    public Post createPost(Long userId, String title, String description, List<AttachedFile> attachedFiles) {
         return new Post(
                 null,
                 title,
                 description,
                 LocalDateTime.now(),
                 LocalDateTime.now(),
-                author,
+                userId,
                 null,
                 attachedFiles
 

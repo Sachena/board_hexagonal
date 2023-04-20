@@ -24,7 +24,11 @@ public class UserPersistenceAdapter implements RetrieveUserPort, SaveUserPort, C
     private final UserMapper userMapper;
     @Override
     public User retrieveUser(String email) {
-        return userMapper.mapToDomain(userRepository.findByEmail(email));
+
+        UserEntity userEntity = userRepository.findByEmail(email);
+        User user = userMapper.mapToDomain(userEntity);
+        System.out.println("user.getId() = " + user.getId());
+        return user;
     }
 
     @Override

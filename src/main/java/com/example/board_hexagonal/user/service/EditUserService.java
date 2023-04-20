@@ -25,7 +25,6 @@ public class EditUserService implements EditUserUsecase {
 
         editUser.editUser(editUserDTO);
 
-
         return editUser;
     }
 }
