@@ -4,6 +4,7 @@ import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
 import com.example.board_hexagonal.attachedFile.repository.AttachedFileRepository;
 import com.example.board_hexagonal.post.adapter.out.PostEntity;
 import com.example.board_hexagonal.post.application.port.in.CreatePostUsecase;
+import com.example.board_hexagonal.post.application.port.in.DeletePostUsecase;
 import com.example.board_hexagonal.post.application.port.in.EditPostUsecase;
 import com.example.board_hexagonal.post.domain.Post;
 import com.example.board_hexagonal.post.dto.CreatePostDto;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
 @Transactional
@@ -39,6 +41,9 @@ class PostServiceTest {
 
     @Autowired
     private EditPostUsecase editPostUsecase;
+
+    @Autowired
+    private DeletePostUsecase deletePostUsecase;
 
 
     @Autowired
@@ -116,29 +121,27 @@ class PostServiceTest {
 
 
     }
-//
-//    @Test
-//    void 게시글삭제(){
-//        // given
-//        CreatePostDto createPostDto = new CreatePostDto();
-//        createPostDto.setNickname("test");
-//        createPostDto.setTitle("deleteTitle");
-//        createPostDto.setDescription("delete");
-//
-//        List<String> fileUrls = new ArrayList<>();
-//        fileUrls.add("delete");
-//        createPostDto.setFileUrls(fileUrls);
-//        Post newPost = postUseCase.createPost(createPostDto);
-//
-//        //when
-//        postUseCase.deletePost(newPost.getId());
-//
-//
-//        // then
-//        Optional<Post> retrievePost = postRepository.findById(newPost.getId());
-//
-//        assertEquals(retrievePost.isEmpty(),true);
-//
-//    }
+
+    @Test
+    void 게시글삭제(){
+        // given
+        CreatePostDto createPostDto = new CreatePostDto();
+        createPostDto.setEmail("test@naver.com");
+        createPostDto.setTitle("deleteTest");
+        createPostDto.setDescription("deleteTest");
+        List<String> fileUrls = new ArrayList<>();
+        fileUrls.add("deleteTest");
+        createPostDto.setFileUrls(fileUrls);
+        Post newPost = createPostUsecase.createPost(createPostDto);
+        PostEntity postEntity = postRepository.findByTitle(createPostDto.getTitle());
+
+        // when
+
+        deletePostUsecase.deletePost(postEntity.getId());
+
+        // then
+        assertNull(postRepository.findByTitle("deleteTest"));
+
+    }
 
 }

@@ -8,6 +8,7 @@ import com.example.board_hexagonal.comment.adapter.out.CommentMapper;
 import com.example.board_hexagonal.comment.domain.Comment;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
 import com.example.board_hexagonal.comment.repository.CommentRepository;
+import com.example.board_hexagonal.post.application.port.out.DeletePostPort;
 import com.example.board_hexagonal.post.application.port.out.RetrievePostPort;
 import com.example.board_hexagonal.post.application.port.out.SavePostPort;
 import com.example.board_hexagonal.post.domain.Post;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort {
+public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort, DeletePostPort {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
@@ -42,7 +43,7 @@ public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort {
 
         UserEntity userEntity = userRepository.findById(post.getUserId()).orElse(null);
 
-        PostEntity postEntity = postMapper.mapToEntityWithoutId(post, userEntity);
+        PostEntity postEntity = postMapper.fromDomainToEntityWithoutId(post, userEntity);
 
         postEntity.addUser(userEntity);
 
@@ -104,6 +105,12 @@ public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort {
     public Post retrievePost(Long postId) {
 
         PostEntity postEntity = postRepository.findById(postId).orElse(null);
-        return postMapper.mapToDomain(postEntity, userMapper.mapToDomain(postEntity.getUser()));
+        return postMapper.fromEntityToDomain(postEntity, userMapper.fromEntityToDomain(postEntity.getUser()));
+    }
+
+    @Override
+    public void deletePost(Long postId) {
+        PostEntity postEntity = postRepository.findById(postId).orElse(null);
+        postRepository.delete(postEntity);
     }
 }

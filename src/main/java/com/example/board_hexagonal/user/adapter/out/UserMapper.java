@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    public UserEntity mapToEntityWithoutId(User user){
+    public UserEntity fromDomainToEntityWithoutId(User user){
 
         return new UserEntity(
                 null,
@@ -21,7 +21,7 @@ public class UserMapper {
 
     }
 
-    public User mapToDomain(UserEntity userEntity) {
+    public User fromEntityToDomain(UserEntity userEntity) {
         
         return new User(
                 userEntity.getId(),
