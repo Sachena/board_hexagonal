@@ -31,24 +31,26 @@ public class CommentPersistenceAdapter implements SaveCommentPort, RetrieveComme
     private final PostRepository postRepository;
 
     @Override
-    public void createComment(Comment comment, Post post) {
+    public Comment createComment(Comment comment, Post post) {
         PostEntity postEntity = postMapper.fromDomainToEntityWithId(post);
 
-        CommentEntity commentEntity = commentMapper.fromDomainToEntity(comment, comment.getAuthorNickname() ,postEntity);
-        commentEntity.addPost(postEntity);
+        CommentEntity commentEntity = commentMapper.fromDomainToEntityWithoutId(comment, comment.getAuthorNickname() ,postEntity);
+        //commentEntity.addPost(postEntity);
 
         commentEntity = commentRepository.save(commentEntity);
-
         postEntity.addComment(commentEntity);
         postRepository.save(postEntity);
+
+        return commentMapper.fromEntityToDomain(commentEntity);
 
     }
 
     @Override
-    public void updateComment(Comment comment, Post post) {
+    public Comment updateComment(Comment comment, Post post) {
         PostEntity postEntity = postMapper.fromDomainToEntityWithId(post);
-        CommentEntity commentEntity = commentMapper.fromDomainToEntity(comment, comment.getAuthorNickname() ,postEntity);
+        CommentEntity commentEntity = commentMapper.fromDomainToEntityWithId(comment, comment.getAuthorNickname() ,postEntity);
         commentRepository.save(commentEntity);
+        return commentMapper.fromEntityToDomain(commentEntity);
     }
 
     @Override

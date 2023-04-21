@@ -49,7 +49,7 @@ public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort, D
 
         List<CommentEntity> commentEntityList = new ArrayList<>();
         for (Comment comment : post.getComments()) {
-            CommentEntity commentEntity = commentMapper.fromDomainToEntity(comment, userEntity.getNickname() ,postEntity);
+            CommentEntity commentEntity = commentMapper.fromDomainToEntityWithId(comment, userEntity.getNickname() ,postEntity);
             commentEntity.addPost(postEntity);
 
             commentEntity = commentRepository.save(commentEntity);
@@ -81,7 +81,7 @@ public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort, D
 
         List<CommentEntity> commentEntityList = new ArrayList<>();
         for (Comment comment : post.getComments()) {
-            CommentEntity commentEntity = commentMapper.fromDomainToEntity(comment, userEntity.getNickname() ,postEntity);
+            CommentEntity commentEntity = commentMapper.fromDomainToEntityWithId(comment, userEntity.getNickname() ,postEntity);
             commentEntity.addPost(postEntity);
 
             commentEntity = commentRepository.save(commentEntity);

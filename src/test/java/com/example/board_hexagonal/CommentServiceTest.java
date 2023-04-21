@@ -1,8 +1,10 @@
 package com.example.board_hexagonal;
 
 import com.example.board_hexagonal.comment.application.port.in.CreateCommentUsecase;
+import com.example.board_hexagonal.comment.application.port.in.EditCommentUsecase;
 import com.example.board_hexagonal.comment.domain.Comment;
 import com.example.board_hexagonal.comment.dto.CreateCommentDTO;
+import com.example.board_hexagonal.comment.dto.EditCommentDTO;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
 import com.example.board_hexagonal.comment.repository.CommentRepository;
 import com.example.board_hexagonal.post.adapter.out.PostEntity;
@@ -39,6 +41,9 @@ class CommentServiceTest {
 
     @Autowired
     private CreateCommentUsecase createCommentUsecase;
+
+    @Autowired
+    private EditCommentUsecase editCommentUsecase;
 
     @Autowired
     private PostRepository postRepository;
@@ -101,14 +106,21 @@ class CommentServiceTest {
 
         CreateCommentDTO createCommentDTO = new CreateCommentDTO();
         createCommentDTO.setPostId(postEntity.getId());
-        createCommentDTO.setDescription("commentTest");
-        createCommentDTO.setAuthorNickname("commentTest");
+        createCommentDTO.setDescription("createComment");
+        createCommentDTO.setAuthorNickname("createComment");
+
+        Comment editComment = createCommentUsecase.createComment(createCommentDTO);
+        EditCommentDTO editCommentDTO = new EditCommentDTO();
+        editCommentDTO.setId(editComment.getId());
+        editCommentDTO.setPostId(postEntity.getId());
+        editCommentDTO.setDescription("editComment");
 
         //when
-        Comment newComment = createCommentUsecase.createComment(createCommentDTO);
+        editCommentUsecase.editComment(editCommentDTO);
+
 
         //then
-        assertEquals(1,postEntity.getComments().size());
+        assertEquals("editComment",postEntity.getComments().get(0).getDescription());
 
     }
 

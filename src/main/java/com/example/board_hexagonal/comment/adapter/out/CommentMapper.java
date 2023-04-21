@@ -42,13 +42,23 @@ public class CommentMapper {
 
     }
 
-    public CommentEntity fromDomainToEntity(Comment comment, String authorNickname ,PostEntity postEntity) {
+    public CommentEntity fromDomainToEntityWithId(Comment comment, String authorNickname ,PostEntity postEntity) {
         return new CommentEntity(
-            comment.getId(),
+                comment.getId(),
             comment.getDescription(),
             comment.getCreatedAt(),
             authorNickname,
             postEntity
+        );
+    }
+
+    public CommentEntity fromDomainToEntityWithoutId(Comment comment, String authorNickname ,PostEntity postEntity) {
+        return new CommentEntity(
+                comment.getId(),
+                comment.getDescription(),
+                comment.getCreatedAt(),
+                authorNickname,
+                postEntity
         );
     }
 

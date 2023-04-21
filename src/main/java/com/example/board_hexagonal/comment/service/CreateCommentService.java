@@ -24,7 +24,7 @@ public class CreateCommentService implements CreateCommentUsecase {
         Comment newComment = new Comment();
         newComment = newComment.createComment(createCommentDTO.getDescription(), createCommentDTO.getAuthorNickname());
 
-        saveCommentPort.createComment(newComment, editPost);
+        newComment = saveCommentPort.createComment(newComment, editPost);
         return newComment;
     }
 }

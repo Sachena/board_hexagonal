@@ -26,7 +26,7 @@ public class EditCommentService implements EditCommentUsecase {
         Comment editComment = retrieveCommentPort.retrieveComment(editCommentDTO.getId());
         editComment = editComment.editComment(editCommentDTO.getDescription());
 
-        saveCommentPort.updateComment(editComment, editPost);
+        editComment = saveCommentPort.updateComment(editComment, editPost);
         return editComment;
     }
 }
