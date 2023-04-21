@@ -21,4 +21,18 @@ public class AttachedFileMapper {
         );
     }
 
+    public List<AttachedFile> fromEntityListToDomainList(List<AttachedFileEntity> attachedFileEntityList) {
+
+        List<AttachedFile> attachedFileList = new ArrayList<>();
+
+        attachedFileEntityList.forEach(attachedFileEntity -> {
+            attachedFileList.add(new AttachedFile(
+                    attachedFileEntity.getId(),
+                    attachedFileEntity.getUrl()
+            ));
+        });
+
+        return attachedFileList;
+
+    }
 }

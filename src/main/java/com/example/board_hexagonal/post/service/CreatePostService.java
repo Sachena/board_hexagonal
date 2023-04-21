@@ -29,11 +29,11 @@ public class CreatePostService implements CreatePostUsecase {
 
         Post newPost = new Post();
         for (String fileUrl : createPostDto.getFileUrls()) {
-            attachedFiles.add(new AttachedFile(null,fileUrl,newPost));
+            attachedFiles.add(new AttachedFile(null,fileUrl));
         }
 
         newPost = newPost.createPost(author.getId(), createPostDto.getTitle(), createPostDto.getDescription(), attachedFiles);
-        savePostPort.savePost(newPost);
+        savePostPort.createPost(newPost);
 
         return newPost;
     }

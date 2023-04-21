@@ -1,7 +1,9 @@
 package com.example.board_hexagonal.comment.entity;
 
 import com.example.board_hexagonal.post.adapter.out.PostEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
@@ -9,7 +11,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class CommentEntity {
 
     @Id

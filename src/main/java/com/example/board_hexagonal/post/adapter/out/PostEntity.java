@@ -4,10 +4,7 @@ package com.example.board_hexagonal.post.adapter.out;
 import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
 import com.example.board_hexagonal.user.adapter.out.UserEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,6 +15,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class PostEntity {
 
     @Id
@@ -54,19 +52,18 @@ public class PostEntity {
 
 
 
-    public void editPost(String title, String description, List<String> fileUrls) {
+    public void editPost(String title, String description) {
         this.title = title;
         this.description = description;
         this.updatedAt = LocalDateTime.now();
 
-        for( String fileUrl : fileUrls){
-            AttachedFileEntity newAttachedFile = new AttachedFileEntity();
-            newAttachedFile.createAttachedFile(fileUrl, this);
-            this.addAttachedFile(newAttachedFile);
-        }
     }
 
     public void addAttachedFileList(List<AttachedFileEntity> attachedFileEntityList) {
         this.attachedFiles = attachedFileEntityList;
+    }
+
+    public void addUser(UserEntity userEntity){
+        this.user = userEntity;
     }
 }

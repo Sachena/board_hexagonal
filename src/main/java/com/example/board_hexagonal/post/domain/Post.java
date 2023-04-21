@@ -5,6 +5,7 @@ import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;
 import com.example.board_hexagonal.comment.domain.Comment;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
 import com.example.board_hexagonal.post.dto.CreatePostDto;
+import com.example.board_hexagonal.post.dto.EditPostDTO;
 import com.example.board_hexagonal.user.adapter.out.UserEntity;
 import com.example.board_hexagonal.user.domain.User;
 import lombok.AllArgsConstructor;
@@ -45,10 +46,22 @@ public class Post {
                 LocalDateTime.now(),
                 LocalDateTime.now(),
                 userId,
-                null,
+                new ArrayList<>(),
                 attachedFiles
 
         );
     }
 
+    public Post editPost(Long postId, String title, String description, List<AttachedFile> attachedFileList) {
+        return new Post(
+                postId,
+                title,
+                description,
+                this.getCreatedAt(),
+                LocalDateTime.now(),
+                this.getUserId(),
+                this.getComments(),
+                attachedFileList
+        );
+    }
 }

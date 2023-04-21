@@ -22,6 +22,4 @@ public class Comment {
 
     private String authorNickname;
 
-    private Post post;
-
 }

@@ -27,7 +27,6 @@ public class UserPersistenceAdapter implements RetrieveUserPort, SaveUserPort, C
 
         UserEntity userEntity = userRepository.findByEmail(email);
         User user = userMapper.mapToDomain(userEntity);
-        System.out.println("user.getId() = " + user.getId());
         return user;
     }
 

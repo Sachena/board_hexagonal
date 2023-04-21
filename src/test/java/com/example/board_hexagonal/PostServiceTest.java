@@ -56,7 +56,6 @@ class PostServiceTest {
         createUserDTO.setNickname("test");
         createUserDTO.setPassword("test");
         User author = createUserUsecase.createUser(createUserDTO);
-
         CreatePostDto createPostDto = new CreatePostDto();
         createPostDto.setEmail("test@naver.com");
         createPostDto.setTitle("testTitle");
@@ -73,7 +72,7 @@ class PostServiceTest {
     void 게시글생성() {
         // given
         CreatePostDto createPostDto = new CreatePostDto();
-        createPostDto.setEmail("newTest@naver.com");
+        createPostDto.setEmail("test@naver.com");
         createPostDto.setTitle("newTestTitle");
         createPostDto.setDescription("asdasdasdasda");
         List<String> fileUrls = new ArrayList<>();
@@ -92,32 +91,27 @@ class PostServiceTest {
     @Test
     void 게시글수정(){
         // given
-        CreatePostDto createPostDto = new CreatePostDto();
-        createPostDto.setEmail("test@naver.com");
-        createPostDto.setTitle("testTitle");
-        createPostDto.setDescription("asdasd");
+        PostEntity postEntity = postRepository.findByTitle("testTitle");
 
-        List<String> fileUrls = new ArrayList<>();
-        fileUrls.add("test");
-        createPostDto.setFileUrls(fileUrls);
-        Post newPost = createPostUsecase.createPost(createPostDto);
 
         //기존 파일 수정
         EditPostDTO editPostDTO = new EditPostDTO();
-        editPostDTO.setId(newPost.getId());
+        editPostDTO.setId(postEntity.getId());
         editPostDTO.setTitle("editTest");
         editPostDTO.setDescription("editTest");
 
         List<String> editUrl = new ArrayList<>();
-        fileUrls.add("editFile");
+        editUrl.add("editFile");
         editPostDTO.setFileUrls(editUrl);
 
         //when
-        editPostUsecase.editPost(editPostDTO);
-
+        Post editPost = editPostUsecase.editPost(editPostDTO);
+        
         //then
-//        PostEntity editPost = postRepository.findByTitle(editPostDTO.getTitle());
-//        assertEquals(editPostDTO.getTitle(), editPost.getTitle());
+        assertEquals(editPostDTO.getTitle(), editPost.getTitle());
+        editPost.getAttachedFiles().forEach(attachedFile -> {
+            System.out.println("attachedFile.getUrl() = " + attachedFile.getUrl());
+        });
 
 
 
