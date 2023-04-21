@@ -22,4 +22,21 @@ public class Comment {
 
     private String authorNickname;
 
+    public Comment createComment(String description, String authorNickname) {
+        return new Comment(
+                null,
+                this.description = description,
+                LocalDateTime.now(),
+                this.authorNickname = authorNickname
+        );
+    }
+
+    public Comment editComment(String description){
+        return new Comment(
+                this.getId(),
+                this.description = description,
+                this.getCreatedAt(),
+                this.getAuthorNickname()
+        );
+    }
 }

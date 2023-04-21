@@ -17,6 +17,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentMapper {
 
+    public Comment fromEntityToDomain(CommentEntity retrieveCommentEntity) {
+
+        return new Comment(
+                retrieveCommentEntity.getId(),
+                retrieveCommentEntity.getDescription(),
+                retrieveCommentEntity.getCreatedAt(),
+                retrieveCommentEntity.getAuthorNickname()
+        );
+    }
+
     public List<Comment> fromEntityListToDomainList(List<CommentEntity> commentEntityList){
         List<Comment> commentList = new ArrayList<>();
         commentEntityList.forEach(commentEntity -> {
@@ -55,4 +65,6 @@ public class CommentMapper {
         });
         return commentEntityList;
     }
+
+
 }
