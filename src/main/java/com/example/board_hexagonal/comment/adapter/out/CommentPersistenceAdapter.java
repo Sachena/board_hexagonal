@@ -2,6 +2,7 @@ package com.example.board_hexagonal.comment.adapter.out;
 
 import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
 import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;
+import com.example.board_hexagonal.comment.application.port.out.DeleteCommentPort;
 import com.example.board_hexagonal.comment.application.port.out.RetrieveCommentPort;
 import com.example.board_hexagonal.comment.application.port.out.SaveCommentPort;
 import com.example.board_hexagonal.comment.domain.Comment;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class CommentPersistenceAdapter implements SaveCommentPort, RetrieveCommentPort {
+public class CommentPersistenceAdapter implements SaveCommentPort, RetrieveCommentPort, DeleteCommentPort {
 
     private final CommentMapper commentMapper;
 
@@ -57,5 +58,15 @@ public class CommentPersistenceAdapter implements SaveCommentPort, RetrieveComme
     public Comment retrieveComment(Long commentId) {
         CommentEntity retrieveCommentEntity = commentRepository.findById(commentId).orElse(null);
         return commentMapper.fromEntityToDomain(retrieveCommentEntity);
+    }
+
+    @Override
+    public void deleteComment(Comment comment, Post post) {
+        PostEntity postEntity = postMapper.fromDomainToEntityWithId(post);
+        CommentEntity commentEntity = commentRepository.findById(comment.getId()).orElse(null);
+        postEntity.deleteComment(commentEntity);
+
+        commentRepository.deleteById(commentEntity.getId());
+        postRepository.save(postEntity);
     }
 }

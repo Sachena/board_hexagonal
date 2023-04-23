@@ -34,10 +34,10 @@ public class PostEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentEntity> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AttachedFileEntity> attachedFiles = new ArrayList<>();
 
     public void addAttachedFile(AttachedFileEntity attachedFile){
@@ -50,6 +50,9 @@ public class PostEntity {
         comment.addPost(this);
     }
 
+    public void deleteComment(CommentEntity commentEntity) {
+        this.comments.remove(commentEntity);
+    }
 
 
     public void editPost(String title, String description) {
@@ -66,4 +69,6 @@ public class PostEntity {
     public void addUser(UserEntity userEntity){
         this.user = userEntity;
     }
+
+
 }

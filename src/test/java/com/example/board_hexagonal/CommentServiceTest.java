@@ -1,9 +1,11 @@
 package com.example.board_hexagonal;
 
 import com.example.board_hexagonal.comment.application.port.in.CreateCommentUsecase;
+import com.example.board_hexagonal.comment.application.port.in.DeleteCommentUsecase;
 import com.example.board_hexagonal.comment.application.port.in.EditCommentUsecase;
 import com.example.board_hexagonal.comment.domain.Comment;
 import com.example.board_hexagonal.comment.dto.CreateCommentDTO;
+import com.example.board_hexagonal.comment.dto.DeleteCommentDTO;
 import com.example.board_hexagonal.comment.dto.EditCommentDTO;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
 import com.example.board_hexagonal.comment.repository.CommentRepository;
@@ -44,6 +46,9 @@ class CommentServiceTest {
 
     @Autowired
     private EditCommentUsecase editCommentUsecase;
+
+    @Autowired
+    private DeleteCommentUsecase deleteCommentUsecase;
 
     @Autowired
     private PostRepository postRepository;
@@ -121,6 +126,33 @@ class CommentServiceTest {
 
         //then
         assertEquals("editComment",postEntity.getComments().get(0).getDescription());
+
+    }
+
+    @Test
+    void 댓글삭제(){
+        // given
+        PostEntity postEntity = postRepository.findByTitle("testTitle");
+        Post editPost = postMapper.fromEntityToDomain(postEntity,userMapper.fromEntityToDomain(postEntity.getUser()));
+
+
+        CreateCommentDTO createCommentDTO = new CreateCommentDTO();
+        createCommentDTO.setPostId(postEntity.getId());
+        createCommentDTO.setDescription("createComment");
+        createCommentDTO.setAuthorNickname("createComment");
+
+        Comment deleteComment = createCommentUsecase.createComment(createCommentDTO);
+
+        DeleteCommentDTO deleteCommentDTO = new DeleteCommentDTO();
+        deleteCommentDTO.setId(deleteComment.getId());
+        deleteCommentDTO.setPostId(postEntity.getId());
+
+        //when
+        deleteCommentUsecase.deleteComment(deleteCommentDTO);
+
+        //then
+        assertEquals(0, postEntity.getComments().size());
+        System.out.println("commentRepository.findAll().size() = " + commentRepository.findAll().size());
 
     }
 
