@@ -39,12 +39,11 @@ public class UserPersistenceAdapter implements RetrieveUserPort, SaveUserPort, C
     public void checkNewUser(CreateUserDTO createUserDTO) {
         //Check Value
         UserEntity checkEmailUser = userRepository.findByEmail( createUserDTO.getEmail());
-        if(checkEmailUser != null){
+        if(!isUserNull(checkEmailUser)){
             throw new DuplicateException("이미 가입된 회원입니다.");
         }
 
-
-        if(userRepository.existsByNickname( createUserDTO.getNickname())){
+        if(isNicknameDuplicate(createUserDTO.getNickname())){
             throw new DuplicateException("중복된 닉네임 입니다.");
         }
     }
@@ -72,5 +71,13 @@ public class UserPersistenceAdapter implements RetrieveUserPort, SaveUserPort, C
             throw new InvalidUserException("올바른 사용자가 아닙니다.");
         }
 
+    }
+
+    private boolean isUserNull(UserEntity userEntity){
+        return userEntity == null ? true : false;
+    }
+
+    private boolean isNicknameDuplicate(String nickName){
+        return userRepository.existsByNickname(nickName);
     }
 }

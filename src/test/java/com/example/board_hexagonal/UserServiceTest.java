@@ -106,6 +106,8 @@ class UserServiceTest {
         createUserDTO.setPassword("test");
 
 
+        System.out.println("userRepository = " + userRepository.findAll());
+
         // then
         assertThrows(DuplicateException.class, ()->{
             createUserUsecase.createUser(createUserDTO);
