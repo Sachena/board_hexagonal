@@ -2,6 +2,7 @@ package com.example.board_hexagonal.user.adapter.out;
 
 
 import com.example.board_hexagonal.user.domain.User;
+import com.example.board_hexagonal.user.domain.UserId;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,7 +25,7 @@ public class UserMapper {
     public User fromEntityToDomain(UserEntity userEntity) {
         
         return new User(
-                userEntity.getId(),
+                new UserId(userEntity.getId()),
                 userEntity.getEmail(),
                 userEntity.getPassword(),
                 userEntity.getNickname(),

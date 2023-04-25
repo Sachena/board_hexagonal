@@ -7,6 +7,7 @@ import com.example.board_hexagonal.post.domain.Post;
 import com.example.board_hexagonal.post.dto.CreatePostDto;
 import com.example.board_hexagonal.user.application.port.out.RetrieveUserPort;
 import com.example.board_hexagonal.user.domain.User;
+import com.example.board_hexagonal.user.domain.UserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class CreatePostService implements CreatePostUsecase {
             attachedFiles.add(new AttachedFile(null,fileUrl));
         }
 
-        newPost = newPost.createPost(author.getId(), createPostDto.getTitle(), createPostDto.getDescription(), attachedFiles);
+        newPost = newPost.createPost(author.getId().getValue(), createPostDto.getTitle(), createPostDto.getDescription(), attachedFiles);
         savePostPort.createPost(newPost);
 
         return newPost;

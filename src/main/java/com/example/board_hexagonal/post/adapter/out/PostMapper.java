@@ -49,7 +49,7 @@ public class PostMapper {
                 postEntity.getDescription(),
                 postEntity.getCreatedAt(),
                 postEntity.getUpdatedAt(),
-                user.getId(),
+                user.getId().getValue(),
                 commentMapper.fromEntityListToDomainList(postEntity.getComments()),
                 attachedFileMapper.fromEntityListToDomainList(postEntity.getAttachedFiles())
         );

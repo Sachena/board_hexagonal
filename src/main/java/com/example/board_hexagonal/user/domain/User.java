@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
-    private Long id;
+    private UserId id;
 
     private String email;
 
