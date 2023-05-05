@@ -37,13 +37,17 @@ public class User {
 
     }
 
-    public void editUser(EditUserDTO editUserDTO) {
-        this.nickname = editUserDTO.getNickname();
+    public void editEmail(String email) {
+        this.email = email;
+    }
+    public void editNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public void deleteUser(DeleteUserDto deleteUserDto) {
         this.isDeleted = true;
     }
+
 
 
 }

@@ -28,7 +28,7 @@ public class CreateUserService implements CreateUserUsecase {
 
         newUser = newUser.createUser(createUserDTO);
 
-        saveUserPort.saveUser(newUser);
+        saveUserPort.createUser(newUser);
 
         return newUser;
     }

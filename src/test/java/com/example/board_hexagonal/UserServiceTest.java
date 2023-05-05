@@ -132,6 +132,7 @@ class UserServiceTest {
 
         // then
         assertEquals("edit", editUser.getNickname());
+        assertEquals("test@naver.com",editUser.getEmail());
 
     }
 
