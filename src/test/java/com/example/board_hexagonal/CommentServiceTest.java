@@ -116,7 +116,7 @@ class CommentServiceTest {
 
         Comment editComment = createCommentUsecase.createComment(createCommentDTO);
         EditCommentDTO editCommentDTO = new EditCommentDTO();
-        editCommentDTO.setId(editComment.getId());
+        editCommentDTO.setId(editComment.getId().getValue());
         editCommentDTO.setPostId(postEntity.getId());
         editCommentDTO.setDescription("editComment");
 
@@ -144,7 +144,7 @@ class CommentServiceTest {
         Comment deleteComment = createCommentUsecase.createComment(createCommentDTO);
 
         DeleteCommentDTO deleteCommentDTO = new DeleteCommentDTO();
-        deleteCommentDTO.setId(deleteComment.getId());
+        deleteCommentDTO.setId(deleteComment.getId().getValue());
         deleteCommentDTO.setPostId(postEntity.getId());
 
         //when

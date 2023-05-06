@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class AttachedFile {
-    private Long id;
+    private AttachedFileId id;
 
-    private String url;
+    private Url url;
 }

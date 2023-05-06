@@ -88,7 +88,7 @@ class PostServiceTest {
         Post newPost = createPostUsecase.createPost(createPostDto);
 
         // then
-        assertEquals(newPost.getTitle(), postRepository.findByTitle(createPostDto.getTitle()).getTitle()  );
+        assertEquals(newPost.getTitle().getValue(), postRepository.findByTitle(createPostDto.getTitle()).getTitle()  );
 
 
     }
@@ -113,7 +113,7 @@ class PostServiceTest {
         Post editPost = editPostUsecase.editPost(editPostDTO);
         
         //then
-        assertEquals(editPostDTO.getTitle(), editPost.getTitle());
+        assertEquals(editPostDTO.getTitle(), editPost.getTitle().getValue());
         editPost.getAttachedFiles().forEach(attachedFile -> {
             System.out.println("attachedFile.getUrl() = " + attachedFile.getUrl());
         });

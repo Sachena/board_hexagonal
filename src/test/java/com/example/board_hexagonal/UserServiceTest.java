@@ -68,7 +68,7 @@ class UserServiceTest {
         });
 
         // then
-        assertNotNull(userRepository.findByEmail(newUser.getEmail()));
+        assertNotNull(userRepository.findByEmail(newUser.getEmail().getValue()));
 
     }
 
@@ -131,8 +131,8 @@ class UserServiceTest {
         User editUser = editUserUsecase.editUser(editUserDTO);
 
         // then
-        assertEquals("edit", editUser.getNickname());
-        assertEquals("test@naver.com",editUser.getEmail());
+        assertEquals("edit", editUser.getNickname().getValue());
+        assertEquals("test@naver.com",editUser.getEmail().getValue());
 
     }
 
@@ -190,7 +190,7 @@ class UserServiceTest {
 
 
         // then
-        assertEquals(testUser.getIsDeleted(), true);
+        assertEquals(testUser.getIsDeleted().getValue(), true);
 
     }
 

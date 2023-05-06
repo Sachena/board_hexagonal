@@ -35,7 +35,7 @@ public class CommentPersistenceAdapter implements SaveCommentPort, RetrieveComme
     public Comment createComment(Comment comment, Post post) {
         PostEntity postEntity = postMapper.fromDomainToEntityWithId(post);
 
-        CommentEntity commentEntity = commentMapper.fromDomainToEntityWithoutId(comment, comment.getAuthorNickname() ,postEntity);
+        CommentEntity commentEntity = commentMapper.fromDomainToEntityWithoutId(comment, comment.getAuthorNickname().getValue() ,postEntity);
         //commentEntity.addPost(postEntity);
 
         commentEntity = commentRepository.save(commentEntity);
@@ -49,7 +49,7 @@ public class CommentPersistenceAdapter implements SaveCommentPort, RetrieveComme
     @Override
     public Comment updateComment(Comment comment, Post post) {
         PostEntity postEntity = postMapper.fromDomainToEntityWithId(post);
-        CommentEntity commentEntity = commentMapper.fromDomainToEntityWithId(comment, comment.getAuthorNickname() ,postEntity);
+        CommentEntity commentEntity = commentMapper.fromDomainToEntityWithId(comment, comment.getAuthorNickname().getValue() ,postEntity);
         commentRepository.save(commentEntity);
         return commentMapper.fromEntityToDomain(commentEntity);
     }
@@ -63,7 +63,7 @@ public class CommentPersistenceAdapter implements SaveCommentPort, RetrieveComme
     @Override
     public void deleteComment(Comment comment, Post post) {
         PostEntity postEntity = postMapper.fromDomainToEntityWithId(post);
-        CommentEntity commentEntity = commentRepository.findById(comment.getId()).orElse(null);
+        CommentEntity commentEntity = commentRepository.findById(comment.getId().getValue()).orElse(null);
         postEntity.deleteComment(commentEntity);
 
         commentRepository.deleteById(commentEntity.getId());

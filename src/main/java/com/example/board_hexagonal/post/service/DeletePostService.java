@@ -17,7 +17,7 @@ public class DeletePostService implements DeletePostUsecase {
     @Override
     public void deletePost(Long postId) {
         Post deletePost = retrievePostPort.retrievePost(postId);
-        deletePostPort.deletePost(deletePost.getId());
+        deletePostPort.deletePost(deletePost.getId().getValue());
 
     }
 }

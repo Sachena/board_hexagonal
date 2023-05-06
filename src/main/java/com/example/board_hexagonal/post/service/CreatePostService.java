@@ -1,6 +1,7 @@
 package com.example.board_hexagonal.post.service;
 
 import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
+import com.example.board_hexagonal.attachedFile.domain.Url;
 import com.example.board_hexagonal.post.application.port.in.CreatePostUsecase;
 import com.example.board_hexagonal.post.application.port.out.SavePostPort;
 import com.example.board_hexagonal.post.domain.Post;
@@ -30,7 +31,7 @@ public class CreatePostService implements CreatePostUsecase {
 
         Post newPost = new Post();
         for (String fileUrl : createPostDto.getFileUrls()) {
-            attachedFiles.add(new AttachedFile(null,fileUrl));
+            attachedFiles.add(new AttachedFile(null,new Url(fileUrl)));
         }
 
         newPost = newPost.createPost(author.getId().getValue(), createPostDto.getTitle(), createPostDto.getDescription(), attachedFiles);

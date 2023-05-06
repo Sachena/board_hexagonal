@@ -1,6 +1,7 @@
 package com.example.board_hexagonal.post.service;
 
 import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
+import com.example.board_hexagonal.attachedFile.domain.Url;
 import com.example.board_hexagonal.post.application.port.in.EditPostUsecase;
 import com.example.board_hexagonal.post.application.port.out.RetrievePostPort;
 import com.example.board_hexagonal.post.application.port.out.SavePostPort;
@@ -26,7 +27,7 @@ public class EditPostService implements EditPostUsecase {
         Post editPost = retrievePostPort.retrievePost(editPostDTO.getId());
         List<AttachedFile> attachedFileList = new ArrayList<>();
         for (String fileUrl : editPostDTO.getFileUrls()) {
-            attachedFileList.add(new AttachedFile(null,fileUrl));
+            attachedFileList.add(new AttachedFile(null,new Url(fileUrl)));
         }
 
         editPost = editPost.editPost(editPostDTO.getId(), editPostDTO.getTitle(), editPostDTO.getDescription(), attachedFileList );

@@ -1,6 +1,6 @@
 package com.example.board_hexagonal.comment.adapter.out;
 
-import com.example.board_hexagonal.comment.domain.Comment;
+import com.example.board_hexagonal.comment.domain.*;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
 import com.example.board_hexagonal.post.adapter.out.PostEntity;
 import com.example.board_hexagonal.post.adapter.out.PostMapper;
@@ -17,13 +17,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentMapper {
 
-    public Comment fromEntityToDomain(CommentEntity retrieveCommentEntity) {
+    public Comment fromEntityToDomain(CommentEntity commentEntity) {
 
         return new Comment(
-                retrieveCommentEntity.getId(),
-                retrieveCommentEntity.getDescription(),
-                retrieveCommentEntity.getCreatedAt(),
-                retrieveCommentEntity.getAuthorNickname()
+                new CommentId(commentEntity.getId()),
+                new CommentDescription(commentEntity.getDescription()),
+                new CommentCreatedAt(commentEntity.getCreatedAt()),
+                new AuthorNickname(commentEntity.getAuthorNickname())
         );
     }
 
@@ -31,10 +31,10 @@ public class CommentMapper {
         List<Comment> commentList = new ArrayList<>();
         commentEntityList.forEach(commentEntity -> {
             commentList.add(new Comment(
-                    commentEntity.getId(),
-                    commentEntity.getDescription(),
-                    commentEntity.getCreatedAt(),
-                    commentEntity.getAuthorNickname()
+                    new CommentId(commentEntity.getId()),
+                    new CommentDescription(commentEntity.getDescription()),
+                    new CommentCreatedAt(commentEntity.getCreatedAt()),
+                    new AuthorNickname(commentEntity.getAuthorNickname())
             ));
         });
 
@@ -44,9 +44,9 @@ public class CommentMapper {
 
     public CommentEntity fromDomainToEntityWithId(Comment comment, String authorNickname ,PostEntity postEntity) {
         return new CommentEntity(
-                comment.getId(),
-            comment.getDescription(),
-            comment.getCreatedAt(),
+                comment.getId().getValue(),
+            comment.getDescription().getValue(),
+            comment.getCreatedAt().getValue(),
             authorNickname,
             postEntity
         );
@@ -54,9 +54,9 @@ public class CommentMapper {
 
     public CommentEntity fromDomainToEntityWithoutId(Comment comment, String authorNickname ,PostEntity postEntity) {
         return new CommentEntity(
-                comment.getId(),
-                comment.getDescription(),
-                comment.getCreatedAt(),
+                null,
+                comment.getDescription().getValue(),
+                comment.getCreatedAt().getValue(),
                 authorNickname,
                 postEntity
         );
@@ -66,10 +66,10 @@ public class CommentMapper {
         List<CommentEntity> commentEntityList = new ArrayList<>();
         comments.forEach(comment -> {
             commentEntityList.add(new CommentEntity(
-                    comment.getId(),
-                    comment.getDescription(),
-                    comment.getCreatedAt(),
-                    comment.getAuthorNickname(),
+                    comment.getId().getValue(),
+                    comment.getDescription().getValue(),
+                    comment.getCreatedAt().getValue(),
+                    comment.getAuthorNickname().getValue(),
                     postEntity
             ));
         });

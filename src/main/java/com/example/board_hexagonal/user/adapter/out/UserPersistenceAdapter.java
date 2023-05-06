@@ -37,7 +37,7 @@ public class UserPersistenceAdapter implements RetrieveUserPort, SaveUserPort, C
 
     @Override
     public void editUser(User user) {
-        UserEntity originEntity = userRepository.findByEmail(user.getEmail());
+        UserEntity originEntity = userRepository.findByEmail(user.getEmail().getValue());
         userRepository.save(userMapper.fromDomainToEntityWithId(user,originEntity.getPosts()));
     }
 

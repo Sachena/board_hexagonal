@@ -3,8 +3,7 @@ package com.example.board_hexagonal.user.adapter.out;
 
 import com.example.board_hexagonal.post.adapter.out.PostEntity;
 import com.example.board_hexagonal.post.repository.PostRepository;
-import com.example.board_hexagonal.user.domain.User;
-import com.example.board_hexagonal.user.domain.UserId;
+import com.example.board_hexagonal.user.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,11 +19,11 @@ public class UserMapper {
 
         return new UserEntity(
                 null,
-                user.getEmail(),
-                user.getPassword(),
-                user.getNickname(),
-                user.getJoinedAt(),
-                user.getIsDeleted(),
+                user.getEmail().getValue(),
+                user.getPassword().getValue(),
+                user.getNickname().getValue(),
+                user.getJoinedAt().getValue(),
+                user.getIsDeleted().getValue(),
                 null
         );
 
@@ -33,11 +32,11 @@ public class UserMapper {
     public UserEntity fromDomainToEntityWithId(User user, List<PostEntity> posts) {
         return new UserEntity(
                 user.getId().getValue(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getNickname(),
-                user.getJoinedAt(),
-                user.getIsDeleted(),
+                user.getEmail().getValue(),
+                user.getPassword().getValue(),
+                user.getNickname().getValue(),
+                user.getJoinedAt().getValue(),
+                user.getIsDeleted().getValue(),
                 posts
 
         );
@@ -47,11 +46,11 @@ public class UserMapper {
         
         return new User(
                 new UserId(userEntity.getId()),
-                userEntity.getEmail(),
-                userEntity.getPassword(),
-                userEntity.getNickname(),
-                userEntity.getJoinedAt(),
-                userEntity.getIsDeleted()
+                new Email(userEntity.getEmail()),
+                new Password(userEntity.getPassword()),
+                new Nickname(userEntity.getNickname()),
+                new UserJoinedAt(userEntity.getJoinedAt()),
+                new Isdeleted(userEntity.getIsDeleted())
         );
     }
 

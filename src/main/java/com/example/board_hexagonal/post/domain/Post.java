@@ -8,6 +8,7 @@ import com.example.board_hexagonal.post.dto.CreatePostDto;
 import com.example.board_hexagonal.post.dto.EditPostDTO;
 import com.example.board_hexagonal.user.adapter.out.UserEntity;
 import com.example.board_hexagonal.user.domain.User;
+import com.example.board_hexagonal.user.domain.UserId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,17 +23,17 @@ import java.util.List;
 @NoArgsConstructor
 public class Post {
 
-    private Long id;
+    private PostId id;
 
-    private String title;
+    private Title title;
 
-    private String description;
+    private PostDescription description;
 
-    private LocalDateTime createdAt;
+    private PostCreatedAt createdAt;
 
-    private LocalDateTime updatedAt;
+    private PostUpdatedAt updatedAt;
 
-    private Long userId;
+    private UserId userId;
 
     private List<Comment> comments;
 
@@ -41,11 +42,11 @@ public class Post {
     public Post createPost(Long userId, String title, String description, List<AttachedFile> attachedFiles) {
         return new Post(
                 null,
-                title,
-                description,
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                userId,
+                new Title(title),
+                new PostDescription(description),
+                new PostCreatedAt(LocalDateTime.now()),
+                new PostUpdatedAt(LocalDateTime.now()),
+                new UserId(userId),
                 new ArrayList<>(),
                 attachedFiles
 
@@ -54,11 +55,11 @@ public class Post {
 
     public Post editPost(Long postId, String title, String description, List<AttachedFile> attachedFileList) {
         return new Post(
-                postId,
-                title,
-                description,
+                new PostId(postId),
+                new Title(title),
+                new PostDescription(description),
                 this.getCreatedAt(),
-                LocalDateTime.now(),
+                new PostUpdatedAt(LocalDateTime.now()),
                 this.getUserId(),
                 this.getComments(),
                 attachedFileList

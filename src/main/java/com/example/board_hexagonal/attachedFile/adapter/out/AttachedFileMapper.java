@@ -1,6 +1,8 @@
 package com.example.board_hexagonal.attachedFile.adapter.out;
 
 import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
+import com.example.board_hexagonal.attachedFile.domain.AttachedFileId;
+import com.example.board_hexagonal.attachedFile.domain.Url;
 import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;
 import com.example.board_hexagonal.post.adapter.out.PostMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +18,7 @@ public class AttachedFileMapper {
     public AttachedFileEntity mapToEntity(AttachedFile attachedFile){
         return new AttachedFileEntity(
                 null,
-                attachedFile.getUrl(),
+                attachedFile.getUrl().getValue(),
                 null
         );
     }
@@ -27,8 +29,8 @@ public class AttachedFileMapper {
 
         attachedFileEntityList.forEach(attachedFileEntity -> {
             attachedFileList.add(new AttachedFile(
-                    attachedFileEntity.getId(),
-                    attachedFileEntity.getUrl()
+                    new AttachedFileId(attachedFileEntity.getId()),
+                    new Url(attachedFileEntity.getUrl())
             ));
         });
 

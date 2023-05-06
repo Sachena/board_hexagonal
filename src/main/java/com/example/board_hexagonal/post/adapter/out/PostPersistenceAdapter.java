@@ -41,7 +41,7 @@ public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort, D
     @Override
     public void createPost(Post post) {
 
-        UserEntity userEntity = userRepository.findById(post.getUserId()).orElse(null);
+        UserEntity userEntity = userRepository.findById(post.getUserId().getValue()).orElse(null);
 
         PostEntity postEntity = postMapper.fromDomainToEntityWithoutId(post, userEntity);
 
@@ -72,10 +72,10 @@ public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort, D
 
     @Override
     public void updatePost(Post post) {
-        UserEntity userEntity = userRepository.findById(post.getUserId()).orElse(null);
+        UserEntity userEntity = userRepository.findById(post.getUserId().getValue()).orElse(null);
 
         PostEntity postEntity = postMapper.fromDomainToEntityWithId(post);
-        postEntity.editPost(post.getTitle(), post.getDescription());
+        postEntity.editPost(post.getTitle().getValue(), post.getDescription().getValue());
 
         postEntity.addUser(userEntity);
 

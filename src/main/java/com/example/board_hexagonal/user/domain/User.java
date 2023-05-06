@@ -21,31 +21,31 @@ public class User {
 
     private UserId id;
 
-    private String email;
+    private Email email;
 
-    private String password;
+    private Password password;
 
-    private String nickname;
+    private Nickname nickname;
 
-    private LocalDateTime joinedAt;
+    private UserJoinedAt joinedAt;
 
-    private Boolean isDeleted;
+    private Isdeleted isDeleted;
 
 
     public User createUser(CreateUserDTO createUserDTO){
-        return new User(null,createUserDTO.getEmail(),createUserDTO.getPassword(),createUserDTO.getNickname(),LocalDateTime.now(),false);
+        return new User(null,new Email(createUserDTO.getEmail()),new Password(createUserDTO.getPassword()),new Nickname(createUserDTO.getNickname()),new UserJoinedAt(LocalDateTime.now()),new Isdeleted(false));
 
     }
 
     public void editEmail(String email) {
-        this.email = email;
+        this.email = new Email(email);
     }
     public void editNickname(String nickname) {
-        this.nickname = nickname;
+        this.nickname = new Nickname(nickname);
     }
 
     public void deleteUser(DeleteUserDto deleteUserDto) {
-        this.isDeleted = true;
+        this.isDeleted = new Isdeleted(true);
     }
 
 

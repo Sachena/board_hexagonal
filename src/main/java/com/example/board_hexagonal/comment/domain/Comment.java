@@ -14,27 +14,27 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Comment {
 
-    private Long id;
+    private CommentId id;
 
-    private String description;
+    private CommentDescription description;
 
-    private LocalDateTime createdAt;
+    private CommentCreatedAt createdAt;
 
-    private String authorNickname;
+    private AuthorNickname authorNickname;
 
     public Comment createComment(String description, String authorNickname) {
         return new Comment(
                 null,
-                this.description = description,
-                LocalDateTime.now(),
-                this.authorNickname = authorNickname
+                this.description = new CommentDescription(description),
+                this.createdAt = new CommentCreatedAt(LocalDateTime.now()),
+                this.authorNickname = new AuthorNickname(authorNickname)
         );
     }
 
     public Comment editComment(String description){
         return new Comment(
                 this.getId(),
-                this.description = description,
+                this.description = new CommentDescription(description),
                 this.getCreatedAt(),
                 this.getAuthorNickname()
         );
