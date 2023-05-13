@@ -17,9 +17,14 @@ public class DeleteUserService implements DeleteUserUsecase {
 
     @Override
     public User deleteUser(DeleteUserDto deleteUserDto) {
+
+        //삭제할 사용자 정보 validation check
         checkUserPort.checkDeleteUser(deleteUserDto);
+
+        //삭제할 사용자 도메인 객체 가져오기
         User deleteUser = retrieveUserPort.retrieveUser(deleteUserDto.getEmail());
 
+        //도메인 객체 DB에 반영
         deleteUser.deleteUser(deleteUserDto);
         return deleteUser;
     }

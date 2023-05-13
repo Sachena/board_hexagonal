@@ -2,7 +2,7 @@ package com.example.board_hexagonal.user.service;
 
 
 import com.example.board_hexagonal.user.application.port.in.CreateUserUsecase;
-import com.example.board_hexagonal.user.application.port.out.CheckNewUserPort;
+import com.example.board_hexagonal.user.application.port.out.CheckUserPort;
 import com.example.board_hexagonal.user.application.port.out.SaveUserPort;
 import com.example.board_hexagonal.user.domain.User;
 import com.example.board_hexagonal.user.dto.CreateUserDTO;
@@ -15,19 +15,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateUserService implements CreateUserUsecase {
 
-    private final CheckNewUserPort checkNewUserPort;
+    private final CheckUserPort checkUserPort;
     private final SaveUserPort saveUserPort;
 
     @Override
     public User createUser(CreateUserDTO createUserDTO) {
 
-        //신규 사용자 데이터 유효성 체크
-        checkNewUserPort.checkNewUser(createUserDTO);
+        //신규 사용자 데이터 validation check
+        checkUserPort.checkNewUser(createUserDTO);
 
+        //신규 사용자 도메인 객체 생성
         User newUser = new User();
-
         newUser = newUser.createUser(createUserDTO);
 
+        //도메인 객체를 DB에 저장
         saveUserPort.createUser(newUser);
 
         return newUser;

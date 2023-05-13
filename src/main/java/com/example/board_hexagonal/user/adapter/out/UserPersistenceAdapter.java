@@ -3,7 +3,6 @@ package com.example.board_hexagonal.user.adapter.out;
 
 import com.example.board_hexagonal.exception.DuplicateException;
 import com.example.board_hexagonal.exception.InvalidUserException;
-import com.example.board_hexagonal.user.application.port.out.CheckNewUserPort;
 import com.example.board_hexagonal.user.application.port.out.CheckUserPort;
 import com.example.board_hexagonal.user.application.port.out.RetrieveUserPort;
 import com.example.board_hexagonal.user.application.port.out.SaveUserPort;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class UserPersistenceAdapter implements RetrieveUserPort, SaveUserPort, CheckNewUserPort, CheckUserPort {
+public class UserPersistenceAdapter implements RetrieveUserPort, SaveUserPort, CheckUserPort {
 
 
     private final UserRepository userRepository;
