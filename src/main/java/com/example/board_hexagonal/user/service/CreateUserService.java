@@ -21,12 +21,12 @@ public class CreateUserService implements CreateUserUsecase {
     @Override
     public User createUser(CreateUserDTO createUserDTO) {
 
-        //신규 사용자 데이터 validation check
-        checkUserPort.checkNewUser(createUserDTO);
-
         //신규 사용자 도메인 객체 생성
         User newUser = new User();
         newUser = newUser.createUser(createUserDTO);
+
+        //신규 사용자 데이터 validation check
+        checkUserPort.checkNewUser(newUser);
 
         //도메인 객체를 DB에 저장
         saveUserPort.createUser(newUser);

@@ -44,7 +44,7 @@ public class User {
         this.nickname = new Nickname(nickname);
     }
 
-    public void deleteUser(DeleteUserDto deleteUserDto) {
+    public void deleteUser() {
         this.isDeleted = new Isdeleted(true);
     }
 

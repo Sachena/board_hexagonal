@@ -24,11 +24,14 @@ public class EditUserService implements EditUserUsecase {
     @Override
     public User editUser(EditUserDTO editUserDTO) {
 
-        //수정할 사용자 정보 validation check
-        checkUserPort.checkEditUser(editUserDTO);
 
         //수정할 사용자 가져오기
         User editUser = retrieveUserPort.retrieveUser(editUserDTO.getEmail());
+
+
+        //수정할 사용자 정보 validation check
+        checkUserPort.checkEditUser(editUser);
+
 
         //도메인 객체의 field들을 수정할 정보에 맞게 update
         editUserCommandFactory.createCommand(EditUserCommandCode.EMAIL,editUser, editUserDTO ).execute();
