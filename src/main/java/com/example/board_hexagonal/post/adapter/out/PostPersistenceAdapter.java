@@ -109,8 +109,8 @@ public class PostPersistenceAdapter implements SavePostPort, RetrievePostPort, D
     }
 
     @Override
-    public void deletePost(Long postId) {
-        PostEntity postEntity = postRepository.findById(postId).orElse(null);
+    public void deletePost(Post deletePost) {
+        PostEntity postEntity = postRepository.findById(deletePost.getId().getValue()).orElse(null);
         postRepository.delete(postEntity);
     }
 }

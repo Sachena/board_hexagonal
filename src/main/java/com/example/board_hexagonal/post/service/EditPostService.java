@@ -25,12 +25,8 @@ public class EditPostService implements EditPostUsecase {
     public Post editPost(EditPostDTO editPostDTO) {
 
         Post editPost = retrievePostPort.retrievePost(editPostDTO.getId());
-        List<AttachedFile> attachedFileList = new ArrayList<>();
-        for (String fileUrl : editPostDTO.getFileUrls()) {
-            attachedFileList.add(new AttachedFile(null,new Url(fileUrl)));
-        }
 
-        editPost = editPost.editPost(editPostDTO.getId(), editPostDTO.getTitle(), editPostDTO.getDescription(), attachedFileList );
+        editPost = editPost.editPost(editPostDTO);
         savePostPort.updatePost(editPost);
 
         return editPost;

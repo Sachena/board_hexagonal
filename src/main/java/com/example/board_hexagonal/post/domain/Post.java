@@ -1,6 +1,7 @@
 package com.example.board_hexagonal.post.domain;
 
 import com.example.board_hexagonal.attachedFile.domain.AttachedFile;
+import com.example.board_hexagonal.attachedFile.domain.Url;
 import com.example.board_hexagonal.attachedFile.entity.AttachedFileEntity;
 import com.example.board_hexagonal.comment.domain.Comment;
 import com.example.board_hexagonal.comment.entity.CommentEntity;
@@ -39,25 +40,38 @@ public class Post {
 
     private List<AttachedFile> attachedFiles;
 
-    public Post createPost(Long userId, String title, String description, List<AttachedFile> attachedFiles) {
+    public Post createPost(User author, CreatePostDto createPostDto) {
+
+        List<AttachedFile> attachedFiles = new ArrayList<>();
+        for (String fileUrl : createPostDto.getFileUrls()) {
+            attachedFiles.add(new AttachedFile(null,new Url(fileUrl)));
+        }
+
+
         return new Post(
                 null,
-                new Title(title),
-                new PostDescription(description),
+                new Title(createPostDto.getTitle()),
+                new PostDescription(createPostDto.getDescription()),
                 new PostCreatedAt(LocalDateTime.now()),
                 new PostUpdatedAt(LocalDateTime.now()),
-                new UserId(userId),
+                new UserId(author.getId().getValue()),
                 new ArrayList<>(),
                 attachedFiles
 
         );
     }
 
-    public Post editPost(Long postId, String title, String description, List<AttachedFile> attachedFileList) {
+    public Post editPost(EditPostDTO editPostDTO) {
+
+        List<AttachedFile> attachedFileList = new ArrayList<>();
+        for (String fileUrl : editPostDTO.getFileUrls()) {
+            attachedFileList.add(new AttachedFile(null,new Url(fileUrl)));
+        }
+
         return new Post(
-                new PostId(postId),
-                new Title(title),
-                new PostDescription(description),
+                new PostId(editPostDTO.getId()),
+                new Title(editPostDTO.getTitle()),
+                new PostDescription(editPostDTO.getDescription()),
                 this.getCreatedAt(),
                 new PostUpdatedAt(LocalDateTime.now()),
                 this.getUserId(),

@@ -26,15 +26,10 @@ public class CreatePostService implements CreatePostUsecase {
     @Override
     public Post createPost(CreatePostDto createPostDto) {
         User author = retrieveUserPort.retrieveUser(createPostDto.getEmail());
-        List<AttachedFile> attachedFiles = new ArrayList<>();
-
 
         Post newPost = new Post();
-        for (String fileUrl : createPostDto.getFileUrls()) {
-            attachedFiles.add(new AttachedFile(null,new Url(fileUrl)));
-        }
 
-        newPost = newPost.createPost(author.getId().getValue(), createPostDto.getTitle(), createPostDto.getDescription(), attachedFiles);
+        newPost = newPost.createPost(author, createPostDto);
         savePostPort.createPost(newPost);
 
         return newPost;
