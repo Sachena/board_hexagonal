@@ -1,5 +1,7 @@
 package com.example.board_hexagonal.comment.domain;
 
+import com.example.board_hexagonal.comment.dto.CreateCommentDTO;
+import com.example.board_hexagonal.comment.dto.EditCommentDTO;
 import com.example.board_hexagonal.post.adapter.out.PostEntity;
 import com.example.board_hexagonal.post.domain.Post;
 import lombok.AllArgsConstructor;
@@ -22,19 +24,19 @@ public class Comment {
 
     private AuthorNickname authorNickname;
 
-    public Comment createComment(String description, String authorNickname) {
+    public Comment createComment(CreateCommentDTO createCommentDTO) {
         return new Comment(
                 null,
-                this.description = new CommentDescription(description),
+                this.description = new CommentDescription(createCommentDTO.getDescription()),
                 this.createdAt = new CommentCreatedAt(LocalDateTime.now()),
-                this.authorNickname = new AuthorNickname(authorNickname)
+                this.authorNickname = new AuthorNickname(createCommentDTO.getAuthorNickname())
         );
     }
 
-    public Comment editComment(String description){
+    public Comment editComment(EditCommentDTO editCommentDTO){
         return new Comment(
                 this.getId(),
-                this.description = new CommentDescription(description),
+                this.description = new CommentDescription(editCommentDTO.getDescription()),
                 this.getCreatedAt(),
                 this.getAuthorNickname()
         );

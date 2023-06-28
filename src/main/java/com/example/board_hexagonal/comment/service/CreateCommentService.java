@@ -19,12 +19,12 @@ public class CreateCommentService implements CreateCommentUsecase {
     @Override
     public Comment createComment(CreateCommentDTO createCommentDTO) {
 
-        Post editPost = retrievePostPort.retrievePost(createCommentDTO.getPostId());
+        Post targetPost = retrievePostPort.retrievePost(createCommentDTO.getPostId());
 
         Comment newComment = new Comment();
-        newComment = newComment.createComment(createCommentDTO.getDescription(), createCommentDTO.getAuthorNickname());
+        newComment = newComment.createComment(createCommentDTO);
 
-        newComment = saveCommentPort.createComment(newComment, editPost);
+        newComment = saveCommentPort.createComment(newComment, targetPost);
         return newComment;
     }
 }
